@@ -1,6 +1,9 @@
 const HEIGHT = 600; // canvas height
 const WIDTH = 800; // canvas width
 let direction = 1;
+const PLAYERWIDTH = 50;
+const PLAYERHEIGHT = 50;
+const STEP = 50; // STEP should be euqal to PLAYERWIDTH/HEIGHT
 
 class Background {
 	constructor() {
@@ -64,34 +67,19 @@ class Player {
 	}
 
 	setupPlayer2() {
-		this.playerPosX = 240;
+		this.playerPosX = 250;
 		this.playerPosY = 550;
 	}
 
 	draw() {
-		image(this.player1Image, this.playerPosX, this.playerPosY);
+		image(this.player1Image, this.playerPosX, this.playerPosY, PLAYERWIDTH, PLAYERHEIGHT);
 	}
 
 	move(x, y) {
-		if (this.playerPosX >= 50) {
-			if (this.playerPosX <= WIDTH - 50) {
-				this.playerPosX += x;
-			}
-		}
-
-		// if (this.playerPosY >= 0 && this.playerPosY < HEIGHT-40)
-		// {
-		//     this.playerPosY += y;
-		// }
 		console.log("width" + WIDTH + " " + this.playerPosX);
 
-		//     && this.playerPosY <= HEIGHT) {
-		// this.playerPosX += 0;
-		// this.playerPosY += 0;
-		// } else
-
-		// this.playerPosX += x;
-		// this.playerPosY += y;
+		this.playerPosX += x;
+		this.playerPosY += y;
 	}
 }
 
@@ -121,8 +109,6 @@ class Obstacle {
 		}
 		this.positionX += direction;
 
-		//
-
 		image(this.obstacleImage, this.obstaclePosX + this.positionX, this.obstaclePosY);
 	}
 }
@@ -132,7 +118,6 @@ class Obstacle {
 const game = new Game();
 const player = new Player(1, 0);
 const player2 = new Player(2, 0);
-
 const obstacle = new Obstacle();
 
 function preload() {
@@ -151,44 +136,45 @@ function draw() {
 
 function keyPressed() {
 	/// Keys player 1
-	if (keyCode === 37) {
-		console.log("left");
-		game.player.move(-50, 0);
+
+	if (keyCode === 37 && game.player.playerPosX > 0) {
+		console.log(game.player.playerPosX + "left");
+		game.player.move(-STEP, 0);
 	}
 
-	if (keyCode === 39) {
+	if (keyCode === 39 && game.player.playerPosX < WIDTH - STEP) {
 		console.log("right");
-		game.player.move(50, 0);
+		game.player.move(STEP, 0);
 	}
 
-	if (keyCode === 38) {
+	if (keyCode === 38 && game.player.playerPosY > 0) {
 		console.log("up");
-		game.player.move(0, -50);
+		game.player.move(0, -STEP);
 	}
 
-	if (keyCode === 40) {
+	if (keyCode === 40 && game.player.playerPosY < HEIGHT - STEP) {
 		console.log("down");
-		game.player.move(0, 50);
+		game.player.move(0, STEP);
 	}
 
 	/// Keys player 2
-	if (keyCode === 65) {
+	if (keyCode === 65 && game.player2.playerPosX > 0) {
 		console.log("left player2");
-		game.player2.move(-50, 0);
+		game.player2.move(-STEP, 0);
 	}
 
-	if (keyCode === 68) {
+	if (keyCode === 68 && game.player2.playerPosX < WIDTH - STEP) {
 		console.log("right player2");
-		game.player2.move(50, 0);
+		game.player2.move(STEP, 0);
 	}
 
-	if (keyCode === 87) {
+	if (keyCode === 87 && game.player2.playerPosY > 0) {
 		console.log("up player2");
-		game.player2.move(0, -50);
+		game.player2.move(0, -STEP);
 	}
 
-	if (keyCode === 83) {
+	if (keyCode === 83 && game.player2.playerPosY < HEIGHT - STEP) {
 		console.log("down player2");
-		game.player2.move(0, 50);
+		game.player2.move(0, STEP);
 	}
 }
