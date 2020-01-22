@@ -3,7 +3,15 @@ const HEIGHT = 600; // canvas height
 const WIDTH = 800; // canvas width
 const PLAYERWIDTH = 50;
 const PLAYERHEIGHT = 50;
+
 const OBSTACLEHEIGHT = 50;
+let direction = -1;
+let spawnFrame1 = 0;
+let spawnFrame2 = 0;
+let spawnFrame3 = 0;
+let spawnFrame4 = 0;
+let spawnFrame5 = 0;
+
 const STEP = 50; // STEP should be euqal to PLAYERWIDTH/HEIGHT
 
 /// ----- Styling constants
@@ -48,21 +56,76 @@ class Game {
 		this.player2.draw();
 
 		/// Every 100 frames a new Object
-		if (frameCount % 80 === 0) {
+		if (frameCount % 50 === 0) {
 			this.obstacles.push(new Obstacle());
 		}
 
-		if (frameCount % 40 === 0) {
-			this.noObstacles.push(new NoObstacle());
-		}
+		if (frameCount % 120 === 0) {
+			let randomnumber = Math.floor(Math.random() * 5) + 1; // obstacles not in first and last row
+			// let width = Math.floor(Math.random() * 3) * 50 + 50; // obstacles not in first and last row
+			let x;
+			let y;
 
-		/// delte if more than 10 obstacles
+			switch (randomnumber) {
+				case 1:
+					if (frameCount > spawnFrame1 + 200) {
+						x = 800;
+						y = 300;
+						this.noObstacles.push(new NoObstacle(-1, this.x, this.y));
+						spawnFrame1 = frameCount;
+					}
+
+					break;
+
+				case 2:
+					if (frameCount > spawnFrame2 + 200) {
+						this.x = -100;
+						this.y = 350;
+						this.noObstacles.push(new NoObstacle(1, this.x, this.y));
+						spawnFrame2 = frameCount;
+					}
+
+					break;
+
+				case 3:
+					if (frameCount > spawnFrame3 + 200) {
+						this.x = 800;
+						this.y = 400;
+						this.noObstacles.push(new NoObstacle(-1, this.x, this.y));
+						spawnFrame3 = frameCount;
+					}
+
+				
+					break;
+
+				case 4:
+					if (frameCount > spawnFrame4 + 200) {
+						this.x = -100;
+						this.y = 450;
+						this.noObstacles.push(new NoObstacle(1, this.x, this.y));
+						spawnFrame4 = frameCount;
+					}
+
+					break;
+
+				case 5:
+					if (frameCount > spawnFrame5 + 20) {
+						this.x = 800;
+						this.y = 500;
+						this.noObstacles.push(new NoObstacle(-1, this.x, this.y));
+						spawnFrame5 = frameCount;
+					}
+
+					break;
+			}
+		}
+		/// delete if more than 10 obstacles
 		if (this.obstacles.length > 10) {
 			this.obstacles.shift();
 		}
 
 		/// delte if more than 10 obstacles
-		if (this.noObstacles.length > 10) {
+		if (this.noObstacles.length > 100) {
 			this.noObstacles.shift();
 		}
 
@@ -70,12 +133,13 @@ class Game {
 		this.obstacles.forEach(function(obstacle) {
 			obstacle.draw();
 			if (
-				game.player.playerPosX + game.player.width > obstacle.x &&
-				game.player.playerPosX + game.player.width < obstacle.x + obstacle.width + game.player.width
+				game.player.playerPosX + game.player.width / 2 / 2 > obstacle.x &&
+				game.player.playerPosX + game.player.width / 2 < obstacle.x + obstacle.width + game.player.width / 2
 			) {
 				if (
-					game.player.playerPosY + game.player.height > obstacle.y &&
-					game.player.playerPosY + game.player.height < obstacle.y + obstacle.height + game.player.height
+					game.player.playerPosY + game.player.height / 2 > obstacle.y &&
+					game.player.playerPosY + game.player.height / 2 <
+						obstacle.y + obstacle.height + game.player.height / 2
 				) {
 					// on collission kill player1
 					game.player.setupPlayer1();
@@ -148,14 +212,14 @@ class Game {
 			}
 
 			/// Player 1 is killd by travelling out of screen
-			if (game.player.playerPosX > WIDTH) {
+			if (game.player.playerPosX > WIDTH + 50 || game.player.playerPosX < 50) {
 				lives1.innerHTML--;
 				game.player.setupPlayer1();
 				console.log("kill 1");
 			}
 
 			/// Player 2 is killd by travelling out of screen
-			if (game.player2.playerPosX > WIDTH) {
+			if (game.player2.playerPosX > WIDTH || game.player.playerPosX < 50) {
 				lives2.innerHTML--;
 				game.player2.setupPlayer2();
 				console.log("kill 2");
@@ -169,6 +233,7 @@ class Player {
 		this.playerNr = playerNr;
 		this.playerScore = playerScore;
 		this.player1Image = loadImage("player-forward.png");
+		this.playerDead = loadImage("dead1.png");
 		this.width = PLAYERWIDTH;
 		this.height = PLAYERHEIGHT;
 		this.playerLives = 0;
@@ -204,34 +269,54 @@ class Player {
 class Obstacle {
 	///----- Players are killed by this
 	constructor() {
-		this.obstacleImage = loadImage("taxi.png");
+		//this.obstacleImage = loadImage("taxi.png");
+
+		this.obstacleImage = [
+			{
+				src: loadImage("taxi.png")
+			},
+			{
+				src: loadImage("truck.png")
+			},
+			{
+				src: loadImage("police.png")
+			},
+			{
+				src: loadImage("fire.png")
+			}
+		];
+
 		this.width = 100;
 		this.height = 50;
-		this.x = 0;
+		this.x = -100;
 		this.y = Math.floor(Math.random() * 5) * 50 + 50; // obstacles not in first and last row
+		this.i = Math.floor(Math.random() * 4); // randomize the 4 images
 		this.counter = 0;
 	}
 
 	draw() {
+		let i = 1;
 		this.x += 3; // speed of obstacales
-		image(this.obstacleImage, this.x, this.y, this.width, this.height);
-		console.log(game.obstacle.x);
+
+		image(this.obstacleImage[this.i].src, this.x, this.y, this.width, this.height);
+		//console.log(game.obstacle.x);
 	}
 }
 
 class NoObstacle {
 	///----- Players are not killed by this and can traval on this
-	constructor() {
+	constructor(direction, x, y) {
 		this.obstacleImage = loadImage("wood.png");
-		this.width = 100;
+		this.width = Math.floor(Math.random() * 3) * 50 + 100;
 		this.height = 50;
-		this.x = 0;
-		this.y = Math.floor(Math.random() * 5) * 50 + 300; // obstacles not in first and last row
+		this.x = x;
+		this.y = y;
 		this.counter = 0;
+		this.direction = direction;
 	}
 
 	draw() {
-		this.x += 2; // speed of obstacales
+		this.x += this.direction; // speed of obstacales
 		image(this.obstacleImage, this.x, this.y, this.width, this.height);
 	}
 }

@@ -1,18 +1,18 @@
 .header {
 	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana,
 		sans-serif;
-	font-size: xx-large;
+	font-size: large;
 }
 
 #collissionsplayer1 {
 	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana,
 		sans-serif;
-	font-size: xx-large;
+	font-size: large;
 }
 
 .start {
-	font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-	text-align: center;
+	font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+	text-align: left;
 	visibility: visible;
 	background-color: grey(255, 0, 0, 0.5);
 }
