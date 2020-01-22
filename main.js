@@ -1,5 +1,5 @@
 /// ----- Game constants
-const HEIGHT = 600; // canvas height
+const HEIGHT = 620; // canvas height
 const WIDTH = 800; // canvas width
 const PLAYERWIDTH = 50;
 const PLAYERHEIGHT = 50;
@@ -14,9 +14,10 @@ const score2 = document.querySelector("#score2");
 const lives1 = document.querySelector("#lives1");
 const lives2 = document.querySelector("#lives2");
 
+
 class Background {
 	constructor() {
-		this.backgroundImage = loadImage("street.png");
+		this.backgroundImage = loadImage("bg2.png");
 	}
 
 	draw() {
@@ -87,24 +88,21 @@ class Game {
 		}
 
 		if (frameCount % 240 === 0) {
-			this.x = 800;
-			this.y = 300;
-			this.noObstacles.push(new NoObstacle(-1, this.x, this.y));
-
+			
 			this.x = -100;
-			this.y = 350;
+			this.y = 370;
 			this.noObstacles.push(new NoObstacle(1, this.x, this.y));
 
 			this.x = 800;
-			this.y = 400;
+			this.y = 420;
 			this.noObstacles.push(new NoObstacle(-1, this.x, this.y));
 
 			this.x = -100;
-			this.y = 450;
+			this.y = 470;
 			this.noObstacles.push(new NoObstacle(1, this.x, this.y));
 
 			this.x = 800;
-			this.y = 500;
+			this.y = 520;
 			this.noObstacles.push(new NoObstacle(-1, this.x, this.y));
 		}
 		/// delete if more than 10 obstacles
@@ -231,7 +229,7 @@ class Obstacle {
 		this.width = 100;
 		this.height = 50;
 		this.x = Math.floor(Math.random() * -50) - 50;
-		this.y = Math.floor(Math.random() * 5) * 50 + 50; // obstacles not in first and last row
+		this.y = Math.floor(Math.random() * 4) * 50 + 70; // obstacles not in first and last row
 		this.i = Math.floor(Math.random() * 4); // randomize the 4 images
 		this.counter = 0;
 	}
