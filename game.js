@@ -145,7 +145,7 @@ class Player {
 
 	setupPlayer1() {
 		// initial position of player 1
-		this.playerPosX = WIDTH / 2 + STEP;
+		this.playerPosX = WIDTH / 2 + 2*STEP;
 		this.playerPosY = HEIGHT - STEP;
 		this.width = 50 * 0.9;
 		this.height = 50 * 0.9;
@@ -153,7 +153,7 @@ class Player {
 
 	setupPlayer2() {
 		// initial position of player 1
-		this.playerPosX = WIDTH / 2 - STEP;
+		this.playerPosX = WIDTH / 2 - 4*STEP;
 		this.playerPosY = HEIGHT - STEP;
 		this.width = 50 * 1.1;
 		this.height = 50 * 1.1;
@@ -168,7 +168,7 @@ class Player {
 				this.state = true;
 				this.livesHTML.innerHTML--;
 
-				this.playerPosX = WIDTH / 2 + STEP;
+				this.playerPosX = Math.floor(Math.random()* WIDTH);
 				this.playerPosY = HEIGHT - STEP;
 			}
 		} else {
@@ -225,7 +225,7 @@ class Player {
 		
 		// 500 points for players who reach goal
 		let a = parseInt(this.scoreHTML.innerHTML);
-		a = a + 500;
+		a = a + 250;
 		this.scoreHTML.innerHTML = a; 
 	}
 }

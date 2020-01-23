@@ -1,3 +1,12 @@
+HTML {
+	margin: 10px auto;
+	text-align: center;
+	background-image: url("greenbg.jpg");
+	background-size: cover;
+	display: flex;
+	justify-content: space-around;
+}
+
 .header {
 	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana,
 		sans-serif;
@@ -5,6 +14,14 @@
 }
 
 .instructions {
+	font-family: 'ZCOOL QingKe HuangYou', cursive;
+	text-align: center;
+	visibility: visible;
+	background-color: rgb(151, 179, 73);
+	color: rgb(76,76,76);
+}
+
+#instructions_sub {
 	font-family: 'ZCOOL QingKe HuangYou', cursive;
 	text-align: center;
 	visibility: visible;
@@ -42,11 +59,21 @@
 	color: black;
 }
 
-HTML {
+#lives2 {
 	margin: 10px auto;
 	text-align: center;
-	background-image: url("greenbg.jpg");
-	background-size: cover;
 	display: flex;
 	justify-content: space-around;
+	font-family: 'ZCOOL QingKe HuangYou', cursive;
+	color:rgb(76,76,76);
 }
+
+#lives1 {
+	margin: 10px auto;
+	text-align: center;
+	display: flex;
+	justify-content: space-around;
+	font-family: 'ZCOOL QingKe HuangYou', cursive;
+	color:rgb(76,76,76);
+}
+
