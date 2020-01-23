@@ -1,5 +1,5 @@
 /// ----- Game constants
-const HEIGHT = 620; // canvas height
+const HEIGHT = 650; // canvas height
 const WIDTH = 800; // canvas width
 const PLAYERWIDTH = 50;
 const PLAYERHEIGHT = 50;
@@ -13,7 +13,6 @@ const score1 = document.querySelector("#score1");
 const score2 = document.querySelector("#score2");
 const lives1 = document.querySelector("#lives1");
 const lives2 = document.querySelector("#lives2");
-
 
 class Background {
 	constructor() {
@@ -72,9 +71,8 @@ class Game {
 				player.playerPosY = nOobst.y;
 				player.draw(); // Player 1 is drawn on top of noObstacle
 
-				//player.livesHTML.innerHTML--;
 			}
-		}
+		 }
 	}
 
 	draw() {
@@ -88,21 +86,20 @@ class Game {
 		}
 
 		if (frameCount % 240 === 0) {
-			
 			this.x = -100;
-			this.y = 370;
+			this.y = 400;
 			this.noObstacles.push(new NoObstacle(1, this.x, this.y));
 
 			this.x = 800;
-			this.y = 420;
+			this.y = 450;
 			this.noObstacles.push(new NoObstacle(-1, this.x, this.y));
 
 			this.x = -100;
-			this.y = 470;
+			this.y = 500;
 			this.noObstacles.push(new NoObstacle(1, this.x, this.y));
 
 			this.x = 800;
-			this.y = 520;
+			this.y = 550;
 			this.noObstacles.push(new NoObstacle(-1, this.x, this.y));
 		}
 		/// delete if more than 10 obstacles
@@ -184,23 +181,23 @@ class Player {
 	}
 
 	draw() {
-		
 		if (!this.state) {
-			image(game.player.playerDead, game.player.playerPosX, game.player.playerPosY, 50, 50);
+			image(this.playerDead, this.playerPosX, this.playerPosY, 50, 50);
 			if (frameCount % 120 === 0) {
 				this.state = true;
-				game.player.livesHTML.innerHTML--;
-				
+				this.livesHTML.innerHTML--;
+				//setupPlayer1();
 			}
-		}else {
-
-		image(this.player1Image, this.playerPosX, this.playerPosY, this.width, this.height);}
-
+		} else {
+			image(this.player1Image, this.playerPosX, this.playerPosY, this.width, this.height);
+		}
 	}
 
 	move(x, y) {
-		this.playerPosX += x;
-		this.playerPosY += y;
+		if (this.state) {
+			this.playerPosX += x;
+			this.playerPosY += y;
+		}
 	}
 	dying() {
 		this.state = false;
@@ -210,7 +207,6 @@ class Player {
 class Obstacle {
 	///----- Players are killed by this
 	constructor() {
-	
 		this.obstacleImage = [
 			{
 				src: loadImage("taxi.png")
@@ -229,7 +225,7 @@ class Obstacle {
 		this.width = 100;
 		this.height = 50;
 		this.x = Math.floor(Math.random() * -50) - 50;
-		this.y = Math.floor(Math.random() * 4) * 50 + 70; // obstacles not in first and last row
+		this.y = Math.floor(Math.random() * 4) * 50 + 50; // obstacles not in first and last row
 		this.i = Math.floor(Math.random() * 4); // randomize the 4 images
 		this.counter = 0;
 	}
@@ -283,46 +279,47 @@ function draw() {
 function keyPressed() {
 	/// --- Keys Player 1
 
-if (game.player.state = true){
-	if (keyCode === 37 && game.player.playerPosX > 0) {
-		game.player.player1Image = loadImage("player-right.png");
-		game.player.move(-STEP, 0);
-	}
+	if (game.player.state === true) {
+		if (keyCode === 37 && game.player.playerPosX > 0) {
+			game.player.player1Image = loadImage("player-right.png");
+			game.player.move(-STEP, 0);
+		}
 
-	if (keyCode === 39 && game.player.playerPosX < WIDTH - STEP) {
-		game.player.player1Image = loadImage("player-left.png");
-		game.player.move(STEP, 0);
-	}
+		if (keyCode === 39 && game.player.playerPosX < WIDTH - STEP) {
+			game.player.player1Image = loadImage("player-left.png");
+			game.player.move(STEP, 0);
+		}
 
-	if (keyCode === 38 && game.player.playerPosY > 0) {
-		game.player.player1Image = loadImage("player-forward.png");
-		game.player.move(0, -STEP);
-	}
+		if (keyCode === 38 && game.player.playerPosY > 0) {
+			game.player.player1Image = loadImage("player-forward.png");
+			game.player.move(0, -STEP);
+		}
 
-	if (keyCode === 40 && game.player.playerPosY < HEIGHT - STEP) {
-		game.player.player1Image = loadImage("player-backward.png");
-		game.player.move(0, STEP);
+		if (keyCode === 40 && game.player.playerPosY < HEIGHT - STEP) {
+			game.player.player1Image = loadImage("player-backward.png");
+			game.player.move(0, STEP);
+		}
 	}
-}
+	if (game.player.state === true) {
+		/// ---- Keys Player 2
+		if (keyCode === 65 && game.player2.playerPosX > 0) {
+			game.player2.player1Image = loadImage("player-right.png");
+			game.player2.move(-STEP, 0);
+		}
 
-	/// ---- Keys Player 2
-	if (keyCode === 65 && game.player2.playerPosX > 0) {
-		game.player2.player1Image = loadImage("player-right.png");
-		game.player2.move(-STEP, 0);
-	}
+		if (keyCode === 68 && game.player2.playerPosX < WIDTH - STEP) {
+			game.player2.player1Image = loadImage("player-left.png");
+			game.player2.move(STEP, 0);
+		}
 
-	if (keyCode === 68 && game.player2.playerPosX < WIDTH - STEP) {
-		game.player2.player1Image = loadImage("player-left.png");
-		game.player2.move(STEP, 0);
-	}
+		if (keyCode === 87 && game.player2.playerPosY > 0) {
+			game.player2.player1Image = loadImage("player-forward.png");
+			game.player2.move(0, -STEP);
+		}
 
-	if (keyCode === 87 && game.player2.playerPosY > 0) {
-		game.player2.player1Image = loadImage("player-forward.png");
-		game.player2.move(0, -STEP);
-	}
-
-	if (keyCode === 83 && game.player2.playerPosY < HEIGHT - STEP) {
-		game.player2.player1Image = loadImage("player-backward.png");
-		game.player2.move(0, STEP);
+		if (keyCode === 83 && game.player2.playerPosY < HEIGHT - STEP) {
+			game.player2.player1Image = loadImage("player-backward.png");
+			game.player2.move(0, STEP);
+		}
 	}
 }
