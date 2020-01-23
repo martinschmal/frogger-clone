@@ -27,6 +27,7 @@ class Obstacle {
 	draw() {
 		//let i = 1;
 		this.x += carSpeed; // speed of obstacales
+		console.log(this.x);
 		image(this.obstacleImage[this.i].src, this.x, this.y, this.width, this.height);
 	}
 }
@@ -44,7 +45,7 @@ class NoObstacle {
 	}
 
 	draw() {
-		this.x += this.direction; // speed of obstacales
+		this.x += this.direction; // direction and speed of obstacales
 		image(this.obstacleImage, this.x, this.y, this.width, this.height); 
 	}
 }

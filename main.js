@@ -7,7 +7,7 @@ const OBSTACLEHEIGHT = 50;
 const STEP = 50; // STEP should be euqal to PLAYERWIDTH/HEIGHT
 
 /// ----- Globals
-let carSpawnSpeed = 80;
+let carSpawnSpeed = 50;
 let carSpeed = 4;
 
 /// ----- Styling constants

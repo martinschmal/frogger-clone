@@ -2,7 +2,7 @@ class Game {
 	constructor() {
 		this.obstacles = [];
 		this.noObstacles = [];
-	}
+	}   
 
 	init() {
 		this.background = new Background();
@@ -61,10 +61,11 @@ class Game {
 
 		/// Create new Obstacles
 		if (frameCount % carSpawnSpeed === 0) {
-
 			
 			this.obstacles.push(new Obstacle());
-		}
+        }
+        
+
 
 		if (frameCount % 350 === 0 ) {
 			this.x = -150;
