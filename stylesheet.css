@@ -8,6 +8,24 @@
 	font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 	text-align: left;
 	visibility: visible;
-	background-color: grey(255, 0, 0, 0.5);
+	background-color: wheat;
 }
 
+.points {
+	margin: 10px auto;
+	text-align: center;
+	background-image: url("bg2.png");
+	background-size: cover;
+	display: flex;
+	justify-content: space-around;
+	font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  }
+
+  HTML {
+	margin: 10px auto;
+	text-align: center;
+	background-image: url("SMVf1kOi5eIr_greenbg.jpg");
+	background-size: cover;
+	display: flex;
+	justify-content: space-around;
+  }
