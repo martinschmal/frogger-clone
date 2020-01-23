@@ -7,7 +7,8 @@ const OBSTACLEHEIGHT = 50;
 const STEP = 50; // STEP should be euqal to PLAYERWIDTH/HEIGHT
 
 /// ----- Globals
-let  carSpawnSpeed = 80;
+let carSpawnSpeed = 80;
+let carSpeed = 4;
 
 /// ----- Styling constants
 const score1 = document.querySelector("#score1");
@@ -15,7 +16,7 @@ const score2 = document.querySelector("#score2");
 const lives1 = document.querySelector("#lives1");
 const lives2 = document.querySelector("#lives2");
 
-/// ----- 
+/// -----
 class Background {
 	constructor() {
 		this.backgroundImage = loadImage("bg2.png");
@@ -89,10 +90,12 @@ class Game {
 
 		/// Create new Obstacles
 		if (frameCount % carSpawnSpeed === 0) {
+
+			
 			this.obstacles.push(new Obstacle());
 		}
 
-		if (frameCount % 350 === 0 || frameCount === 0 ) {
+		if (frameCount % 350 === 0 ) {
 			this.x = -150;
 			this.y = 400;
 			this.noObstacles.push(new NoObstacle(1, this.x, this.y));
@@ -213,12 +216,10 @@ class Player {
 				text("Small Frog has " + game.player.scoreHTML.innerHTML + " Points", 100, 150);
 				text("Big Frog has " + game.player2.scoreHTML.innerHTML + " Points", 100, 200);
 				fill(255, 255, 255);
-
 				if (parseInt(game.player.scoreHTML.innerHTML) > parseInt(game.player2.scoreHTML.innerHTML))
 					text("Small Frog wins!", 100, 300);
 				else text("Big Frog wins!", 100, 300);
-
-							}
+			}
 		}
 	}
 
@@ -240,7 +241,8 @@ class Player {
 
 	win() {
 		this.state = true;
-		carSpawnSpeed = carSpawnSpeed -1;
+		carSpawnSpeed = carSpawnSpeed - 1;
+		carSpeed = carSpeed +1;
 
 		textSize(48);
 		text("Score: " + this.scoreHTML.innerHTML, this.playerPosX, this.playerPosY);
@@ -275,12 +277,12 @@ class Obstacle {
 		this.x = Math.floor(Math.random() * -50) - 50;
 		this.y = Math.floor(Math.random() * 4) * 50 + 100; // obstacles not in first and last row
 		this.i = Math.floor(Math.random() * 4); // randomize the 4 images
-		this.counter = 0;
+	
 	}
 
 	draw() {
-		let i = 1;
-		this.x += 3; // speed of obstacales
+		//let i = 1;
+		this.x += carSpeed; // speed of obstacales
 		image(this.obstacleImage[this.i].src, this.x, this.y, this.width, this.height);
 	}
 }
@@ -299,19 +301,23 @@ class NoObstacle {
 
 	draw() {
 		this.x += this.direction; // speed of obstacales
-		image(this.obstacleImage, this.x, this.y, this.width, this.height);
+		image(this.obstacleImage, this.x, this.y, this.width, this.height); 
 	}
 }
 
 /// start the Game
 console.clear();
 const game = new Game();
-const player = new Player(1, 0, 3);
-const player2 = new Player(2, 0, 3);
+const player = new Player(0, 0);
+const player2 = new Player(0, 0);
 const obstacle = new Obstacle();
 const noObstacle = new NoObstacle();
 
 function preload() {
+
+	// mySound = loadSound('/Gmbtwjqrqhfs_jump.mp3');
+	// mySound.setVolume(0.1);
+	// mySound.play();
 	game.init();
 }
 
