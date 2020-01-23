@@ -5,27 +5,48 @@
 }
 
 .instructions {
-	font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-	text-align: left;
+	font-family: 'ZCOOL QingKe HuangYou', cursive;
+	text-align: center;
 	visibility: visible;
-	background-color: wheat;
+	background-color: rgb(151, 179, 73);
+	color: white;
 }
 
 .points {
 	margin: 10px auto;
 	text-align: center;
-	background-image: url("bg2.png");
+	/* background-image: url("bg2.png"); */
+	background-color: rgb(81, 178, 222);
 	background-size: cover;
 	display: flex;
 	justify-content: space-around;
-	font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  }
+	font-family: 'ZCOOL QingKe HuangYou', cursive;
+	color: white;
+}
 
-  HTML {
+#score2 {
 	margin: 10px auto;
 	text-align: center;
-	background-image: url("SMVf1kOi5eIr_greenbg.jpg");
+	display: flex;
+	justify-content: space-around;
+	font-family: 'ZCOOL QingKe HuangYou', cursive;
+	color: black;
+}
+
+#score1 {
+	margin: 10px auto;
+	text-align: center;
+	display: flex;
+	justify-content: space-around;
+	font-family: 'ZCOOL QingKe HuangYou', cursive;
+	color: black;
+}
+
+HTML {
+	margin: 10px auto;
+	text-align: center;
+	background-image: url("greenbg.jpg");
 	background-size: cover;
 	display: flex;
 	justify-content: space-around;
-  }
+}
