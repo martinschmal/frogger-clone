@@ -65,8 +65,6 @@ class Game {
 			this.obstacles.push(new Obstacle());
         }
         
-
-
 		if (frameCount % 350 === 0 ) {
 			this.x = -150;
 			this.y = 400;
@@ -162,6 +160,7 @@ class Player {
 	}
 
 	draw() {
+		// draws the players alive or dead
 		if (!this.state) {
 			image(this.playerDead, this.playerPosX, this.playerPosY, 50, 50);
 
@@ -179,6 +178,7 @@ class Player {
 	}
 
 	checkGameOver() {
+		// Games is over when all players lost all lives
 		if (game.player.state === false && game.player2.state === false) {
 			if (game.player.livesHTML.innerHTML == 0 && game.player2.livesHTML.innerHTML == 0) {
 				textSize(120);
@@ -196,22 +196,25 @@ class Player {
 	}
 
 	move(x, y) {
+		// players can only move if they are alive
 		if (this.state) {
 			this.playerPosX += x;
 			this.playerPosY += y;
 		}
 	}
 	dying() {
+		// killed player by cars get false status
 		this.state = false;
-		//this.livesHTML.innerHTML--;
-	}
+		}
 
 	travelling() {
+		// players which are travelling on the woord get more points
 		this.state = true;
 		this.scoreHTML.innerHTML++;
 	}
 
 	win() {
+		// cars speed up if one player reached goal
 		this.state = true;
 		carSpawnSpeed = carSpawnSpeed - 1;
 		carSpeed = carSpeed +1;
@@ -219,9 +222,10 @@ class Player {
 		textSize(48);
 		text("Score: " + this.scoreHTML.innerHTML, this.playerPosX, this.playerPosY);
 		fill(0, 102, 193);
-		console.log(this);
+		
+		// 500 points for players who reach goal
 		let a = parseInt(this.scoreHTML.innerHTML);
 		a = a + 500;
-		this.scoreHTML.innerHTML = a; // 1000;
+		this.scoreHTML.innerHTML = a; 
 	}
 }

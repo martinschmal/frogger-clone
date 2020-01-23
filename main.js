@@ -16,7 +16,7 @@ const score2 = document.querySelector("#score2");
 const lives1 = document.querySelector("#lives1");
 const lives2 = document.querySelector("#lives2");
 
-/// -----
+/// ----- Background
 class Background {
 	constructor() {
 		this.backgroundImage = loadImage("bg2.png");
@@ -37,10 +37,6 @@ const obstacle = new Obstacle();
 const noObstacle = new NoObstacle();
 
 function preload() {
-
-	// mySound = loadSound('/Gmbtwjqrqhfs_jump.mp3');
-	// mySound.setVolume(0.1);
-	// mySound.play();
 	game.init();
 }
 
@@ -52,7 +48,7 @@ function draw() {
 	game.draw();
 }
 
-/// Keyboard inputs and boundary check
+/// Keyboard inputs, boundary check, player alive check
 function keyPressed() {
 	/// --- Keys Player 1
 

@@ -21,7 +21,6 @@ class Obstacle {
 		this.x = Math.floor(Math.random() * -50) - 50;
 		this.y = Math.floor(Math.random() * 4) * 50 + 100; // obstacles not in first and last row
 		this.i = Math.floor(Math.random() * 4); // randomize the 4 images
-	
 	}
 
 	draw() {
