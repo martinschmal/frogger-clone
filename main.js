@@ -10,6 +10,10 @@ const STEP = 50; // STEP should be euqal to PLAYERWIDTH/HEIGHT
 let carSpawnSpeed = 50;
 let carSpeed = 4;
 
+//soundFormats('mp3', 'ogg');
+let frogJump;
+let carHonk;
+
 /// ----- Styling constants
 const score1 = document.querySelector("#score1");
 const score2 = document.querySelector("#score2");
@@ -37,7 +41,11 @@ const obstacle = new Obstacle();
 const noObstacle = new NoObstacle();
 
 function preload() {
-	game.init();
+ frogJump = loadSound('jump.mp3');
+ carHonk = loadSound('honk.mp3');
+ audience = loadSound('audience.mp3');
+ splash = loadSound('splash.mp3');
+		game.init();
 }
 
 function setup() {
@@ -52,6 +60,7 @@ function draw() {
 function keyPressed() {
 	/// --- Keys Player 1
 
+	frogJump.play();
 	if (game.player.state === true) {
 		if (keyCode === 37 && game.player.playerPosX > 0) {
 			game.player.player1Image = loadImage("player-right.png");

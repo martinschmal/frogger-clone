@@ -24,9 +24,7 @@ class Obstacle {
 	}
 
 	draw() {
-		//let i = 1;
 		this.x += carSpeed; // speed of obstacales
-		console.log(this.x);
 		image(this.obstacleImage[this.i].src, this.x, this.y, this.width, this.height);
 	}
 }

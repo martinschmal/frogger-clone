@@ -10,6 +10,8 @@ class Game {
 		this.noObstacle = new NoObstacle();
 		this.player = new Player(lives1, score1);
 		this.player2 = new Player(lives2, score2);
+
+		
 	}
 
 	setup() {
@@ -181,6 +183,7 @@ class Player {
 		// Games is over when all players lost all lives
 		if (game.player.state === false && game.player2.state === false) {
 			if (game.player.livesHTML.innerHTML == 0 && game.player2.livesHTML.innerHTML == 0) {
+				//audience.play();
 				textSize(120);
 				text("Game Over", 50, 500);
 				fill(255, 255, 255);
@@ -204,17 +207,20 @@ class Player {
 	}
 	dying() {
 		// killed player by cars get false status
+		carHonk.play();
 		this.state = false;
 		}
 
 	travelling() {
 		// players which are travelling on the woord get more points
+		//splash.play();
 		this.state = true;
 		this.scoreHTML.innerHTML++;
 	}
 
 	win() {
 		// cars speed up if one player reached goal
+		audience.play();
 		this.state = true;
 		carSpawnSpeed = carSpawnSpeed - 1;
 		carSpeed = carSpeed +1;
