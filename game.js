@@ -11,7 +11,11 @@ class Game {
 		this.player = new Player(lives1, score1);
 		this.player2 = new Player(lives2, score2);
 
-		
+	/// load sound files
+		frogJump = loadSound('jump.mp3');
+		carHonk = loadSound('honk.mp3');
+		audience = loadSound('audience.mp3');
+		splash = loadSound('splash.mp3');
 	}
 
 	setup() {
